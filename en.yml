@@ -2,3 +2,9 @@ en:
   exception_messages:
     active_record:
       record_not_found: "Sorry! the item you have requested does not exist."
+    action_controller:
+      routing_error: "Invalid url: please check if you have typed the url correctly"
+    action_controller:
+      unknown_action: "Invalid action: Please check if you have typed the url correctly"
+
+
