@@ -4,7 +4,6 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
-  I18n.load_path = ['en.yml']
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
