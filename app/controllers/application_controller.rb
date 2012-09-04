@@ -15,8 +15,8 @@ class ApplicationController < ActionController::Base
 
   def rescue_action_in_public(exception)
     flash[:notice] = I18n.t(translate_string_for(exception))
-    exception_file = "#{RAILS_ROOT}/exception_log.txt"
-    File.open(exception_file, 'a') {|f| f.write(exception.message + "\n" + exception.backtrace.join("\n")) }
+    EXCEPTION_LOGGER.info(exception.message)
+    EXCEPTION_LOGGER.info(exception.backtrace.join("\n"))
     redirect_to posts_path
   end
 
