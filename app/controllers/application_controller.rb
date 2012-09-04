@@ -14,11 +14,13 @@ class ApplicationController < ActionController::Base
 
   private
 
-def rescue_action_in_public(exception)
-  case exception
-    when ActiveRecord::RecordNotFound, ActionController::UnknownAction, ActionController::RoutingError
-      flash[:notice] = I18n.t( 'exception_messages.active_record.base.record_not_found' )
-      redirect_to posts_path
-    end
+  def rescue_action_in_public(exception)
+    flash[:notice] = I18n.t(translate_string_for(exception))
+    redirect_to posts_path
+  end
+
+  def translate_string_for(exception)
+    t_string = exception.class.to_s.underscore.gsub(%r|/|, '.')
+    return "exception_messages.#{t_string}";
   end
 end
