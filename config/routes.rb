@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :member => {:test_post => :post}, :collection => {:invalid_sql => :get}
+  map.connect 'posts/invalid_action/:action', :controller => 'posts' # for invalid action exception
 
   # The priority is based upon order of creation: first created -> highest priority.
 
@@ -40,6 +41,4 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing or commenting them out if you're using named routes and resources.
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
 end
