@@ -80,4 +80,11 @@ class PostsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  def test_post
+  end
+  def invalid_sql
+    Post.find_by_sql("select * from select * from whatever");
+  end
+  def connection_lost
+  end
 end

@@ -14,10 +14,15 @@ class ApplicationController < ActionController::Base
   private
 
   def rescue_action_in_public(exception)
-    flash[:notice] = I18n.t(translate_string_for(exception))
-    EXCEPTION_LOGGER.info(exception.message)
-    EXCEPTION_LOGGER.info(exception.backtrace.join("\n"))
-    redirect_to posts_path
+    begin
+      p I18n.t(translate_string_for(exception))
+      flash[:notice] = I18n.t!(translate_string_for(exception))
+      EXCEPTION_LOGGER.info(exception.message)
+      EXCEPTION_LOGGER.info(exception.backtrace.join("\n"))
+      redirect_to posts_path
+    rescue I18n::MissingTranslationData
+      super
+    end
   end
 
   def translate_string_for(exception)

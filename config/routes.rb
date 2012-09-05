@@ -1,5 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :posts
+  map.resources :posts, :member => {:test_post => :post}, :collection => {:invalid_sql => :get}
 
   # The priority is based upon order of creation: first created -> highest priority.
 
