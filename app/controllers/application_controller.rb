@@ -16,12 +16,13 @@ class ApplicationController < ActionController::Base
   def rescue_action_in_public(exception)
     begin
       p I18n.t(translate_string_for(exception))
-      flash[:notice] = I18n.t!(translate_string_for(exception))
-      EXCEPTION_LOGGER.info(exception.message)
-      EXCEPTION_LOGGER.info(exception.backtrace.join("\n"))
-      redirect_to posts_path
+      flash.now[:notice] = I18n.t!(translate_string_for(exception))
+      render :partial => 'shared/error'
     rescue I18n::MissingTranslationData
       super
+    ensure
+      EXCEPTION_LOGGER.info(exception.message)
+      EXCEPTION_LOGGER.info(exception.backtrace.join("\n"))
     end
   end
 
